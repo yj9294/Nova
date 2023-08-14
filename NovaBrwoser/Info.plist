@@ -27,6 +27,8 @@
 	<true/>
 	<key>GADNativeAdValidatorEnabled</key>
 	<false/>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-3293495489937580~5422497544</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>

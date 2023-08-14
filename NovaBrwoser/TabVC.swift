@@ -37,7 +37,6 @@ class TabVC: UIViewController {
     @IBAction func add() {
         BrowserUtil.shared.add()
         self.dismiss(animated: true)
-        FirebaseUtil.log(event: .tabNew, params: ["bro": "tab"])
     }
     
     @IBAction func back() {
@@ -62,7 +61,6 @@ class TabVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewAppear = true
-        FirebaseUtil.log(event: .tabShow)
         GADUtil.share.load(.native)
     }
     

@@ -30,7 +30,6 @@
 		C7CFE2E22A541C260030CD29 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = C7CFE2E12A541C260030CD29 /* FirebaseCrashlytics */; };
 		C7CFE2E42A541C260030CD29 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = C7CFE2E32A541C260030CD29 /* FirebaseRemoteConfig */; };
 		C7CFE2E72A541C8C0030CD29 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = C7CFE2E62A541C8C0030CD29 /* FacebookCore */; };
-		C7CFE2E92A541DCC0030CD29 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C7CFE2E82A541DCB0030CD29 /* GoogleService-Info.plist */; };
 		C7CFE2EB2A541E250030CD29 /* FirebaseUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFE2EA2A541E250030CD29 /* FirebaseUtil.swift */; };
 /* End PBXBuildFile section */
 
@@ -54,7 +53,6 @@
 		C7CFE2D82A53E7D60030CD29 /* TabVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabVC.swift; sourceTree = "<group>"; };
 		C7CFE2DA2A540C510030CD29 /* PrivacyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyVC.swift; sourceTree = "<group>"; };
 		C7CFE2DC2A5416030030CD29 /* CleanVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanVC.swift; sourceTree = "<group>"; };
-		C7CFE2E82A541DCB0030CD29 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C7CFE2EA2A541E250030CD29 /* FirebaseUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUtil.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -113,7 +111,6 @@
 				C7B79FC92A4EC03A00D7F2D7 /* Assets.xcassets */,
 				C7B79FCB2A4EC03A00D7F2D7 /* LaunchScreen.storyboard */,
 				C7B79FCE2A4EC03A00D7F2D7 /* Info.plist */,
-				C7CFE2E82A541DCB0030CD29 /* GoogleService-Info.plist */,
 			);
 			path = NovaBrwoser;
 			sourceTree = "<group>";
@@ -192,7 +189,6 @@
 			files = (
 				C7972D5C2A57EB7A00699BFA /* GADConfig.json in Resources */,
 				C7B79FCD2A4EC03A00D7F2D7 /* LaunchScreen.storyboard in Resources */,
-				C7CFE2E92A541DCC0030CD29 /* GoogleService-Info.plist in Resources */,
 				C7B79FCA2A4EC03A00D7F2D7 /* Assets.xcassets in Resources */,
 				C7B79FC82A4EC03800D7F2D7 /* Main.storyboard in Resources */,
 			);
@@ -365,7 +361,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 935CNM9Y4K;
+				DEVELOPMENT_TEAM = 59CN4J44AC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NovaBrwoser/Info.plist;
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Please allow access to your activity tracking to provide personalized push services and reduce interference caused by irrelevant services.";
@@ -380,7 +376,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.testbird.NovaBrwoser;
+				PRODUCT_BUNDLE_IDENTIFIER = com.testbird.NovaBrwoser.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -398,7 +394,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 935CNM9Y4K;
+				DEVELOPMENT_TEAM = 59CN4J44AC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NovaBrwoser/Info.plist;
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Please allow access to your activity tracking to provide personalized push services and reduce interference caused by irrelevant services.";
@@ -413,7 +409,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.testbird.NovaBrwoser;
+				PRODUCT_BUNDLE_IDENTIFIER = com.testbird.NovaBrwoser.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
