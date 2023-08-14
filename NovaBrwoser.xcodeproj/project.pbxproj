@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C7238D252A839C2100B58F70 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = C7238D242A839C2100B58F70 /* FacebookCore */; };
+		458AB5B92A83B6CF009B625A /* FacebookAEM in Frameworks */ = {isa = PBXBuildFile; productRef = 458AB5B82A83B6CF009B625A /* FacebookAEM */; };
+		458AB5BB2A83B6CF009B625A /* FacebookBasics in Frameworks */ = {isa = PBXBuildFile; productRef = 458AB5BA2A83B6CF009B625A /* FacebookBasics */; };
+		458AB5BD2A83B6CF009B625A /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 458AB5BC2A83B6CF009B625A /* FacebookCore */; };
 		C74A46622A57E80500284F40 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = C74A46612A57E80500284F40 /* GoogleMobileAds */; };
 		C79B9BAE2A52AEF10047505F /* BrowserUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79B9BAD2A52AEF00047505F /* BrowserUtil.swift */; };
 		C79B9BB12A52B6530047505F /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C79B9BB02A52B6530047505F /* IQKeyboardManagerSwift */; };
@@ -48,8 +50,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				458AB5B92A83B6CF009B625A /* FacebookAEM in Frameworks */,
+				458AB5BD2A83B6CF009B625A /* FacebookCore in Frameworks */,
+				458AB5BB2A83B6CF009B625A /* FacebookBasics in Frameworks */,
 				C74A46622A57E80500284F40 /* GoogleMobileAds in Frameworks */,
-				C7238D252A839C2100B58F70 /* FacebookCore in Frameworks */,
 				C79B9BB12A52B6530047505F /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -113,7 +117,9 @@
 			packageProductDependencies = (
 				C79B9BB02A52B6530047505F /* IQKeyboardManagerSwift */,
 				C74A46612A57E80500284F40 /* GoogleMobileAds */,
-				C7238D242A839C2100B58F70 /* FacebookCore */,
+				458AB5B82A83B6CF009B625A /* FacebookAEM */,
+				458AB5BA2A83B6CF009B625A /* FacebookBasics */,
+				458AB5BC2A83B6CF009B625A /* FacebookCore */,
 			);
 			productName = NovaBrwoser;
 			productReference = C7B79FBD2A4EC03800D7F2D7 /* NovaBrwoser.app */;
@@ -146,7 +152,7 @@
 			packageReferences = (
 				C79B9BAF2A52B6530047505F /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				C74A46602A57E80400284F40 /* XCRemoteSwiftPackageReference "GoogleMobileAds" */,
-				C7238D232A839C2000B58F70 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+				458AB5B72A83B6CF009B625A /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 			);
 			productRefGroup = C7B79FBE2A4EC03800D7F2D7 /* Products */;
 			projectDirPath = "";
@@ -329,9 +335,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 6RUCWS7WPP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NovaBrwoser/Info.plist;
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Please allow access to your activity tracking to provide personalized push services and reduce interference caused by irrelevant services.";
@@ -346,7 +353,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.testbird.NovaBrwoser;
+				PRODUCT_BUNDLE_IDENTIFIER = com.beautynova.browsers.fast;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -363,9 +370,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 6RUCWS7WPP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NovaBrwoser/Info.plist;
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Please allow access to your activity tracking to provide personalized push services and reduce interference caused by irrelevant services.";
@@ -380,7 +388,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.testbird.NovaBrwoser;
+				PRODUCT_BUNDLE_IDENTIFIER = com.beautynova.browsers.fast;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -416,12 +424,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		C7238D232A839C2000B58F70 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+		458AB5B72A83B6CF009B625A /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
+				minimumVersion = 14.0.0;
 			};
 		};
 		C74A46602A57E80400284F40 /* XCRemoteSwiftPackageReference "GoogleMobileAds" */ = {
@@ -443,9 +451,19 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		C7238D242A839C2100B58F70 /* FacebookCore */ = {
+		458AB5B82A83B6CF009B625A /* FacebookAEM */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C7238D232A839C2000B58F70 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			package = 458AB5B72A83B6CF009B625A /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookAEM;
+		};
+		458AB5BA2A83B6CF009B625A /* FacebookBasics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 458AB5B72A83B6CF009B625A /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookBasics;
+		};
+		458AB5BC2A83B6CF009B625A /* FacebookCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 458AB5B72A83B6CF009B625A /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
 			productName = FacebookCore;
 		};
 		C74A46612A57E80500284F40 /* GoogleMobileAds */ = {
