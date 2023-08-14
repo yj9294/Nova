@@ -29,6 +29,8 @@ class LaunchingVC: UIViewController {
             self.timer = nil
         }
         self.timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(launching), userInfo: nil, repeats: true)
+        GADUtil.share.load(.interstitial)
+        GADUtil.share.load(.native)
     }
     
     @objc func launching() {
@@ -36,9 +38,16 @@ class LaunchingVC: UIViewController {
         if progress > 1.0 {
             timer?.invalidate()
             timer = nil
-            self.presentHome()
+            GADUtil.share.show(.interstitial) { _ in
+                if self.progress > 1.0 {
+                    self.presentHome()
+                }
+            }
         } else {
             progressView.progress = Float(progress)
+            if progress > 0.3, GADUtil.share.isLoadedIngerstitalAD(){
+                duration = 0.1
+            }
         }
     }
     

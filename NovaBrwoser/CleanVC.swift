@@ -19,6 +19,7 @@ class CleanVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         start()
+        GADUtil.share.load(.interstitial)
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -38,9 +39,14 @@ class CleanVC: UIViewController {
         progress += 0.01 / duration
         if progress > 1.0 {
             timer?.invalidate()
-            self.back()
+            GADUtil.share.show(.interstitial) { _ in
+                self.back()
+            }
         } else {
             progressLabel.text = "\(Int(progress*100))%"
+            if progress > 0.3, GADUtil.share.isLoadedIngerstitalAD() {
+                duration = 0.1
+            }
         }
     }
     

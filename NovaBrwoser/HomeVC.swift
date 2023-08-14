@@ -11,7 +11,7 @@ import AppTrackingTransparency
 import IQKeyboardManagerSwift
 import UniformTypeIdentifiers
 
-let AppUrl = "https://itunes.apple.com/cn/app/id6458101346"
+let AppUrl = "https://itunes.apple.com/cn/app/id"
 
 class HomeVC: UIViewController {
     
@@ -25,6 +25,9 @@ class HomeVC: UIViewController {
     @IBOutlet weak var settingView: UIView!
     @IBOutlet weak var cleanAlertView: UIView!
     
+    @IBOutlet weak var adView: GADNativeView!
+    var viewAppear: Bool = false
+    var adImpressionTime = Date(timeIntervalSinceNow: -11)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,8 +35,23 @@ class HomeVC: UIViewController {
         textView.layer.borderColor = UIColor(named: "#AF82FF")?.cgColor
         textView.layer.cornerRadius = 12
         textView.layer.masksToBounds = true
+        NotificationCenter.default.addObserver(self, selector: #selector(receiveNativeAD), name: .nativeUpdate, object: nil)
     }
-
+    
+    @objc func receiveNativeAD(noti: Notification) {
+        if viewAppear {
+            if adImpressionTime.timeIntervalSinceNow < -10 {
+                adImpressionTime = Date()
+                if let ad = noti.object as? NativeADModel {
+                    adView.nativeAd = ad.nativeAd
+                }
+                return
+            }
+            adView.nativeAd = .none
+            NSLog("[ad] 10s home 原生广告刷新或数据填充间隔.")
+        }
+        
+    }
 
     func refreshStatus() {
         progressView.progress = BrowserUtil.shared.progress()
@@ -41,6 +59,15 @@ class HomeVC: UIViewController {
         textField.text = BrowserUtil.shared.url()
         searchBUtton.isSelected = BrowserUtil.shared.isLoading()
         bootomCollection.reloadData()
+        var date = Date()
+        if BrowserUtil.shared.progress() == 0.1 {
+            date = Date()
+            FirebaseUtil.log(event: .webStart)
+        }
+        if BrowserUtil.shared.progress() == 1.0 {
+            let time = ceil(abs(date.timeIntervalSinceNow))
+            FirebaseUtil.log(event: .webSuccess, params: ["bro": "\(time)"])
+        }
     }
     
     func addObserver() {
@@ -60,15 +87,21 @@ class HomeVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        viewAppear = true
         IQKeyboardManager.shared.enable = true
         refreshStatus()
         addObserver()
+        FirebaseUtil.log(event: .homeShow)
         ATTrackingManager.requestTrackingAuthorization { _ in
         }
+        GADUtil.share.load(.native)
+        GADUtil.share.load(.interstitial)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        viewAppear = false
+        GADUtil.share.disappear(.native)
     }
     
     override func viewDidLayoutSubviews() {
@@ -91,6 +124,7 @@ extension HomeVC {
                 return
             }
             search()
+            FirebaseUtil.log(event: .search, params: ["bro": textField.text!])
         }
         searchBUtton.isSelected = !searchBUtton.isSelected
     }
@@ -102,6 +136,7 @@ extension HomeVC {
     
     func showClanAlert() {
         presentCleanAlertView()
+        FirebaseUtil.log(event: .cleanClick)
     }
     
     func showTab() {
@@ -121,8 +156,10 @@ extension HomeVC {
         present(vc, animated: true)
         if let vc = vc as? CleanVC {
             vc.completion = {
+                FirebaseUtil.log(event: .cleanSuccess)
                 self.refreshStatus()
                 self.alert("Cleaned.")
+                FirebaseUtil.log(event: .cleanAlert)
             }
         }
     }
@@ -157,6 +194,7 @@ extension HomeVC {
         BrowserUtil.shared.add()
         refreshStatus()
         dismissSettingView()
+        FirebaseUtil.log(event: .tabNew, params: ["bro": "setting"])
     }
     
     @IBAction func shareAction() {
@@ -167,10 +205,12 @@ extension HomeVC {
         let vc = UIActivityViewController(activityItems: [url], applicationActivities: nil)
         present(vc, animated: true)
         dismissSettingView()
+        FirebaseUtil.log(event: .shareClick)
     }
     
     @IBAction func copyAction() {
         dismissSettingView()
+        FirebaseUtil.log(event: .copyClick)
         if !BrowserUtil.shared.webItem.isNavigation {
             UIPasteboard.general.setValue(BrowserUtil.shared.webItem.webView.url?.absoluteString ?? "", forPasteboardType: UTType.plainText.identifier)
             self.alert("Copied.")
@@ -196,54 +236,14 @@ extension HomeVC {
         if let vc = vc as? PrivacyVC {
             vc.type = "Privacy Policy"
             vc.content = """
-Privacy Policy
+The following terms and conditions (the “Terms”) govern your use of the VPN services we provide (the “Service”) and their associated website domains (the “Site”). These Terms constitute a legally binding agreement (the “Agreement”) between you and Tap VPN. (the “Tap VPN”).
 
-If you decide to use our services, then this page will inform you of our policies regarding the collection, use, and disclosure of personal information.
+Activation of your account constitutes your agreement to be bound by the Terms and a representation that you are at least eighteen (18) years of age, and that the registration information you have provided is accurate and complete.
 
-If you choose to use our services, you agree to our collection and use of information related to this policy. The personal information we collect will be used to provide and improve services, and we will not use or share your information with anyone except as described in this privacy policy.
+Tap VPN may update the Terms from time to time without notice. Any changes in the Terms will be incorporated into a revised Agreement that we will post on the Site. Unless otherwise specified, such changes shall be effective when they are posted. If we make material changes to these Terms, we will aim to notify you via email or when you log in at our Site.
 
-Information Collection and Use
-
-For a better experience, when using our apps, we may ask you to provide us with certain personally identifiable information. The information we request will be retained by us and used in accordance with this Privacy Policy.
-
-The app does use third-party services that may collect information used to identify you. These third parties need to know how you interact with the ads served in the app, which helps us keep the app's cost free. Advertisers and AD networks use some of the information collected by the app, including but not limited to your mobile device's unique identification ID and your location.
-
-How we share information
-
-For the following reasons, we may engage third party companies to promote our services, provide services on our behalf, perform services related to our Services, or help us analyze how to use our Services.
-
-Update
-
-We may make changes to this Privacy Policy at our sole discretion and indicate the date of the last change. If you need to know about updates to our Privacy policy, you can often click here. We reserve the right to send you an email notifying you of substantial changes, and previous versions will be available from this page.
-
-Contact us
-
-If you have any questions about this policy, you can contact our support team via the email below.
-
-kyle02132@gmail.com
-
-
-Terms of use
-
-Use of the application
-
-1. You agree that we will use your information for the purposes required by laws and regulations.
-
-2. You acknowledge that you may not use our App for illegal purposes.
-
-3. You agree that we may discontinue providing our products and services at any time without prior notice.
-
-4. By agreeing to download or install our software, you accept our Privacy Policy.
-
-Update
-
-We may make changes to this Privacy Policy at our sole discretion and indicate the date of the last change. If you need to know about updates to our Privacy policy, you can often click here. We reserve the right to send you an email notifying you of substantial changes, and previous versions will be available from this page.
-
-Contact us
-
-If you have any questions about this policy, you can contact our support team via the email below.
-
-kyle02132@gmail.com
+By using Tap VPN
+You agree to comply with all applicable laws and regulations in connection with your use of this service.regulations in connection with your use of this service.
 """
         }
     }
@@ -256,17 +256,14 @@ kyle02132@gmail.com
         if let vc = vc as? PrivacyVC {
             vc.type = "Terms of Users"
             vc.content = """
-Terms of use
-Use of the application
-1. You agree that we will use your information for the purposes required by laws and regulations.
-2. You acknowledge that you may not use our App for illegal purposes.
-3. You agree that we may discontinue providing our products and services at any time without prior notice.
-4. By agreeing to download or install our software, you accept our Privacy Policy.
-Update
-We may make changes to this Privacy Policy at our sole discretion and indicate the date of the last change. If you need to know about updates to our Privacy policy, you can often click here. We reserve the right to send you an email notifying you of substantial changes, and previous versions will be available from this page.
-Contact us
-If you have any questions about this policy, you can contact our support team via the email below.
-kyle02132@gmail.com
+The following terms and conditions (the “Terms”) govern your use of the VPN services we provide (the “Service”) and their associated website domains (the “Site”). These Terms constitute a legally binding agreement (the “Agreement”) between you and Tap VPN. (the “Tap VPN”).
+
+Activation of your account constitutes your agreement to be bound by the Terms and a representation that you are at least eighteen (18) years of age, and that the registration information you have provided is accurate and complete.
+
+Tap VPN may update the Terms from time to time without notice. Any changes in the Terms will be incorporated into a revised Agreement that we will post on the Site. Unless otherwise specified, such changes shall be effective when they are posted. If we make material changes to these Terms, we will aim to notify you via email or when you log in at our Site.
+
+By using Tap VPN
+You agree to comply with all applicable laws and regulations in connection with your use of this service.regulations in connection with your use of this service.
 """
         }
 
@@ -337,6 +334,7 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
         }
         textField.text = HomeItem.allCases[indexPath.row].url
         search()
+        FirebaseUtil.log(event: .fbClick, params: ["bro": HomeItem.allCases[indexPath.row].rawValue])
     }
 }
 

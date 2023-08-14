@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import FacebookCore
+import Firebase
+import FBSDKCoreKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -18,7 +19,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
+        FirebaseApp.configure()
         
+        FirebaseUtil.log(property: .local)
+        FirebaseUtil.log(event: .open)
+        FirebaseUtil.log(event: .openCold)
+        FirebaseUtil.requestRemoteConfig()
         
         if let url = connectionOptions.urlContexts.first?.url {
             ApplicationDelegate.shared.application(
@@ -68,6 +74,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             vc.dismiss(animated: false)
         }
         if enterbackgrouded {
+            FirebaseUtil.log(event: .openHot)
         }
     }
 

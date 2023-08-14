@@ -9,14 +9,35 @@ import UIKit
 
 class TabVC: UIViewController {
     
+    @IBOutlet weak var adView: GADNativeView!
+    var viewAppear: Bool = false
+    var adImpressionTime: Date {
+        GADUtil.share.tabNativeAdImpressionDate
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(receiveNativeAD), name: .nativeUpdate, object: nil)
     }
     
+    @objc func receiveNativeAD(noti: Notification) {
+        if viewAppear {
+            if adImpressionTime.timeIntervalSinceNow < -10 {
+                GADUtil.share.tabNativeAdImpressionDate = Date()
+                if let ad = noti.object as? NativeADModel, ad.nativeAd != nil {
+                    adView.nativeAd = ad.nativeAd
+                }
+                return
+            }
+            NSLog("[ad] 10s tab 原生广告刷新或数据填充间隔.")
+        }
+    }
     
     @IBAction func add() {
         BrowserUtil.shared.add()
         self.dismiss(animated: true)
+        FirebaseUtil.log(event: .tabNew, params: ["bro": "tab"])
     }
     
     @IBAction func back() {
@@ -40,10 +61,15 @@ class TabVC: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        viewAppear = true
+        FirebaseUtil.log(event: .tabShow)
+        GADUtil.share.load(.native)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        viewAppear = false
         super.viewWillDisappear(animated)
+        GADUtil.share.disappear(.native)
     }
 }
 
